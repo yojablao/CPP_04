@@ -1,0 +1,175 @@
+Thought for a few seconds
+
+Here’s a **focused To-Do list** for **Module 04 – Exercise 03 (Interface & Recap)**:
+
+---
+
+## 1. **AMateria (Abstract “Interface”)**
+
+* **Header: `AMateria.hpp`**
+
+  * `protected:`
+
+    * `std::string type;`
+  * **Public:**
+
+    * Constructor: `AMateria(std::string const & type);`
+    * Copy constructor, copy assignment, virtual destructor
+    * `std::string const & getType() const;`
+    * **Pure virtual**: `virtual AMateria* clone() const = 0;`
+    * **Virtual**: `virtual void use(ICharacter& target);`
+
+* **Source: `AMateria.cpp`**
+
+  * Implement ctor, copy, assign, dtor, `getType()`, default `use()` (can be empty).
+
+---
+
+## 2. **Concrete Materias: Ice & Cure**
+
+* **Headers: `Ice.hpp`, `Cure.hpp`**
+
+  * Inherit from `AMateria`
+  * Constructors (default, copy), copy assignment, destructor
+  * Override:
+
+    * `AMateria* clone() const` → returns `new Ice(*this)` (or `new Cure(*this)`)
+    * `void use(ICharacter& target)` →
+
+      * Ice: `std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";`
+      * Cure: `std::cout << "* heals " << target.getName() << "'s wounds *\n";`
+
+* **Sources: `Ice.cpp`, `Cure.cpp`**
+
+  * Implement the above.
+
+---
+
+## 3. **ICharacter Interface**
+
+* **Header: `ICharacter.hpp`**
+
+  ```cpp
+  class ICharacter {
+  public:
+    virtual ~ICharacter() {}
+    virtual std::string const & getName() const = 0;
+    virtual void equip(AMateria* m) = 0;
+    virtual void unequip(int idx) = 0;
+    virtual void use(int idx, ICharacter& target) = 0;
+  };
+  ```
+
+---
+
+## 4. **Character Class**
+
+* **Header: `Character.hpp`**
+
+  * Implements `ICharacter`
+  * Private:
+
+    * `std::string name;`
+    * `AMateria* inventory[4];`
+  * Public:
+
+    * `Character(std::string const & name);`
+    * Copy ctor, copy assignment, destructor (deep copy materias)
+    * Override:
+
+      * `getName()`
+      * `equip(AMateria* m)` → put in first empty slot (0–3)
+      * `unequip(int idx)` → set slot to `nullptr` but **do not delete**
+      * `use(int idx, ICharacter& target)` → if slot non-null, call `inventory[idx]->use(target);`
+
+* **Source: `Character.cpp`**
+
+  * Initialize slots to `nullptr`
+  * Implement deep copy in copy ctor & assignment:
+
+    * Delete existing materias, clone each of the source’s non-null slots
+  * Destructor: delete any non-null `inventory[i]`
+
+---
+
+## 5. **IMateriaSource Interface**
+
+* **Header: `IMateriaSource.hpp`**
+
+  ```cpp
+  class IMateriaSource {
+  public:
+    virtual ~IMateriaSource() {}
+    virtual void learnMateria(AMateria* m) = 0;
+    virtual AMateria* createMateria(std::string const & type) = 0;
+  };
+  ```
+
+---
+
+## 6. **MateriaSource Class**
+
+* **Header: `MateriaSource.hpp`**
+
+  * Implements `IMateriaSource`
+  * Private: `AMateria* sources[4];`
+  * Public: default ctor, copy ctor, assignment, destructor
+
+    * `learnMateria(AMateria* m)` → if space, store `m->clone()` (or directly `m`? subject says copy)
+    * `createMateria(std::string const & type)` → find a stored materia with matching `getType()`, return `clone()`, else return `nullptr`
+
+* **Source: `MateriaSource.cpp`**
+
+  * Initialize `sources[i]` to `nullptr`
+  * Clean up in dtor
+  * Deep copy in copy ctor/assign: clone each stored materia
+
+---
+
+## 7. **`main.cpp` Tests**
+
+* **Basic workflow:**
+
+  ```cpp
+  IMateriaSource* src = new MateriaSource();
+  src->learnMateria(new Ice());
+  src->learnMateria(new Cure());
+
+  ICharacter* me = new Character("me");
+  AMateria* tmp;
+
+  tmp = src->createMateria("ice");
+  me->equip(tmp);
+  tmp = src->createMateria("cure");
+  me->equip(tmp);
+
+  ICharacter* bob = new Character("bob");
+  me->use(0, *bob);
+  me->use(1, *bob);
+
+  delete bob;
+  delete me;
+  delete src;
+  ```
+* **Add extra tests:**
+
+  * Equipping more than 4 materias (nothing happens).
+  * Unequip + ensure no deletion of materia.
+  * Copying a `Character` and verifying deep copy of its inventory.
+
+---
+
+## 8. **Makefile**
+
+* Targets:
+
+  * `all` → compile with `-Wall -Wextra -Werror -std=c++98`
+  * `clean`, `fclean`, `re`, `run` (to build + execute tests)
+
+---
+
+❗️ **Remember:**
+
+* No STL containers or algorithms.
+* Follow the Rule of Three/Five (you need copy ctor, assignment, dtor).
+* Avoid memory leaks (test with AddressSanitizer or Valgrind).
