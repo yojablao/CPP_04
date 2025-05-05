@@ -23,7 +23,7 @@ void WrongAnimal::makeSound() const
 }
 WrongAnimal::WrongAnimal(const WrongAnimal & o)
 {
-    *this = o;
     std:: cout << "WrongAnimal copy constructor "<< std::endl;
+    *this = o;
 }
 std::string WrongAnimal::getType()const {return(type);}
