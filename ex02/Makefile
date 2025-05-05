@@ -1,7 +1,7 @@
 NAME =  animal
 
-CC = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -fno-omit-frame-pointer
+CC = c++ 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
 SRC = Animal.cpp AAnimal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 HEAD = Animal.hpp AAnimal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
 OBJ =$(SRC:.cpp=.o)

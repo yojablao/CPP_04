@@ -20,7 +20,7 @@ void Cat::makeSound() const
 {
     std:: cout << "Meow!"<< std::endl;
 }
-Cat::Cat(const Cat & o)
+Cat::Cat(const Cat & o):Animal(o)
 {
     *this = o;
     std:: cout << "Cat copy constructor "<< std::endl;

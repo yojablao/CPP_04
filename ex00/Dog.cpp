@@ -21,7 +21,7 @@ void Dog::makeSound()const
 {
     std:: cout << "Woof! Woof!" << std::endl;
 }
-Dog::Dog(const Dog & o)
+Dog::Dog(const Dog & o):Animal(o)
 {
     if(&o != this)
         *this = o;

@@ -20,7 +20,7 @@ void WrongCat::makeSound() const
 {
     std:: cout << "Meow!"<< std::endl;
 }
-WrongCat::WrongCat(const WrongCat & o)
+WrongCat::WrongCat(const WrongCat & o):WrongAnimal(o)
 {
     *this = o;
     std:: cout << "WrongCat copy constructor "<< std::endl;

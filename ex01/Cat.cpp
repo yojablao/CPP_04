@@ -23,7 +23,7 @@ void Cat::makeSound() const
 {
     std:: cout << "Meow!"<< std::endl;
 }
-Cat::Cat(const Cat & o)
+Cat::Cat(const Cat & o) :Animal(o)
 {    
     if(&o != this)
         *this = o;
