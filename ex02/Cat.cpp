@@ -8,7 +8,7 @@ Cat::Cat()
 }
 Cat::~Cat()
 {
-    // delete brain;
+    delete brain;
     std:: cout << "Cat destructor" << std::endl;
 }
 Brain* Cat::getBrain() const {
