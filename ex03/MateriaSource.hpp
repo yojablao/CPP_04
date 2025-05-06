@@ -6,7 +6,7 @@
 
 class MateriaSource : public IMateriaSource {
 private:
-    AMateria* _materias[4]; // Store up to 4 learned materias
+    AMateria* _materias[4]; 
 public:
     MateriaSource();
     MateriaSource(const MateriaSource& other);

@@ -9,10 +9,7 @@ Ice::Ice(const Ice &o):AMateria("ice")
     *this = o;
 
 }
-Ice::~Ice()
-{
-
-}
+Ice::~Ice(){}
 AMateria *Ice::clone() const
 {
     return(new Ice(*this));

@@ -4,6 +4,25 @@
 #include "MateriaSource.hpp"
 #include <iostream>
 
+void subjecttest()
+{
+    std::cout << "\n===== subject Testing  =====" << std::endl;
+        IMateriaSource* src = new MateriaSource();
+        src->learnMateria(new Ice());
+        src->learnMateria(new Cure());
+        ICharacter* me = new Character("me");
+        AMateria* tmp;
+        tmp = src->createMateria("ice");
+        me->equip(tmp);
+        tmp = src->createMateria("cure");
+        me->equip(tmp);
+        ICharacter* bob = new Character("bob");
+        me->use(0, *bob);
+        me->use(1, *bob);
+        delete bob;
+        delete me;
+        delete src;
+}
 void testCharacter() {
     std::cout << "\n===== Testing Character =====" << std::endl;
 
@@ -57,7 +76,6 @@ void testMateriaSource() {
     if (iced) {
         dummy.equip(iced);
         dummy.use(1, dummy);
-        // std::cout << "Failed to create unknown materia." << std::endl;
     }
     if (!unknown) {
         std::cout << "Failed to create unknown materia." << std::endl;
@@ -70,8 +88,6 @@ void testMateriaSource() {
 int main() {
     testCharacter();
     testMateriaSource();
-
-    // Check for leaks with valgrind:
-    // valgrind --leak-check=full ./a.out
+    subjecttest();
     return 0;
 }
