@@ -8,11 +8,8 @@ Cat::Cat()
 }
 Cat::~Cat()
 {
-    delete brain;
+    delete this->brain;
     std:: cout << "Cat destructor" << std::endl;
-}
-Brain* Cat::getBrain() const {
-    return brain;
 }
 Cat &Cat::operator=(const Cat&o)
 {
@@ -20,7 +17,7 @@ Cat &Cat::operator=(const Cat&o)
      if (this != &o) 
     {
         this->brain = new Brain(*o.brain);
-        std:: cout << "Cat copy assignmen  t ######################################################################################################"<< std::endl;
+        std:: cout << "Cat copy assignment"<< std::endl;
     }
     return (*this);
 }
@@ -34,4 +31,7 @@ Cat::Cat(const Cat & o):AAnimal(o)
     if(&o != this)
         *this = o;
     std:: cout << "Cat copy constructor "<< std::endl;
+}
+Brain* Cat::Mybrain() const {
+    return brain;
 }

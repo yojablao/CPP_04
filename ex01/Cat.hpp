@@ -13,6 +13,7 @@ class Cat : public Animal
         ~Cat();
         void makeSound()const ;
         Cat &operator=(const  Cat &o);
+        Brain* Mybrain() const ;
 };
 
 #endif

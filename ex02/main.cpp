@@ -21,14 +21,14 @@ int main() {
 
     std::cout << "\nTesting deep copy of Brain:\n";
     Cat basicDog;
-    basicDog.getBrain()->setIdea(0, "I'm hungry");
-    basicDog.getBrain()->setIdea(1, "I want to play");
+    basicDog.Mybrain()->setIdea(0, "I'm hungry");
+    basicDog.Mybrain()->setIdea(1, "I want to play");
 
-    Cat copyDog(basicDog);  // Calls deep copy constructor
-    copyDog.getBrain()->setIdea(1, "I changed my mind");
+    Cat copyDog(basicDog);  
+    copyDog.Mybrain()->setIdea(1, "I changed my mind");
 
-    std::cout << "Original Dog Brain Idea 1: " << basicDog.getBrain()->getIdea(1) << std::endl;
-    std::cout << "Copied Dog Brain Idea 1: " << copyDog.getBrain()->getIdea(1) << std::endl;
+    std::cout << "Original Dog Brain Idea 1: " << basicDog.Mybrain()->getIdea(1) << std::endl;
+    std::cout << "Copied Dog Brain Idea 1: " << copyDog.Mybrain()->getIdea(1) << std::endl;
 
     std::cout << "\nCreating an array of 4 AAnimal* with alternating Dog and Cat:\n";
 

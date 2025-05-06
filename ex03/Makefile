@@ -1,9 +1,11 @@
-NAME =  animal
-
+NAME =  animal 
 CC = c++ 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
-SRC = Animal.cpp AAnimal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
-HEAD = Animal.hpp AAnimal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
+
+SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp Character.cpp
+
+HEAD = Cure.hpp Ice.hpp Character.hpp IMateriaSource.hpp MateriaSource.hpp AMateria.hpp ICharacter.hpp Cure.hpp Ice.hpp 
+
 OBJ =$(SRC:.cpp=.o)
 
 %.o: %.cpp $(HEAD)

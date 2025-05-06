@@ -1,55 +1,82 @@
+#include "Character.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "MateriaSource.hpp"
 #include <iostream>
-#include "AAnimal.hpp"
-#include "Dog.hpp"
-#include "Cat.hpp"
+
+void testCharacter() {
+    std::cout << "\n===== Testing Character =====" << std::endl;
+
+    // Create materias
+    AMateria* cure = new Cure();
+    AMateria* ice = new Ice();
+
+    // Create characters
+    Character alice("Alice");
+    Character bob("Bob");
+
+    // Equip materias
+    alice.equip(cure);
+    alice.equip(ice);
+    bob.equip(ice->clone());
+
+    // Use materias
+    alice.use(0, bob);  // Alice heals Bob
+    bob.use(0, alice);  // Bob shoots ice at Alice
+
+    // Test copy constructor (deep copy)
+    Character copy(alice);
+    copy.use(1, bob);   // Copy shoots ice at Bob
+
+    // Test assignment operator (deep copy)
+    Character assigned("Assigned");
+    assigned = alice;
+    assigned.use(0, bob); // Assigned heals Bob
+
+    // Test unequip (no double-free)
+    alice.unequip(0);   // Alice drops cure (memory leak if not handled)
+    delete cure;        // Manually delete if unequip doesn't handle it
+
+    // Equip same materia twice (should not duplicate)
+    AMateria* anotherIce = new Ice();
+    alice.equip(anotherIce);
+    alice.equip(anotherIce); // Should ignore duplicate
+    alice.use(2, bob);       // Uses anotherIce
+}
+
+void testMateriaSource() {
+    std::cout << "\n===== Testing MateriaSource =====" << std::endl;
+
+    MateriaSource source;
+    source.learnMateria(new Cure());
+    source.learnMateria(new Ice());
+
+    AMateria* cured = source.createMateria("Cure");
+    AMateria* iced = source.createMateria("Ice");
+    AMateria* unknown = source.createMateria("Fire"); // Should return nullptr
+
+    Character dummy("Dummy");
+    if (cured) {
+        dummy.equip(cured);
+        dummy.use(0, dummy); // Heals self
+    }
+    if (iced) {
+        dummy.equip(iced);
+        dummy.use(1, dummy); // Shoots ice at self
+    }
+    if (!unknown) {
+        std::cout << "Failed to create unknown materia." << std::endl;
+    }
+
+    delete cured;
+    delete iced;
+}
 
 int main() {
-    std::cout << "Creating a Dog and a Cat using abstract base class pointers:\n";
+    testCharacter();
+    testMateriaSource();
 
-    const AAnimal* dog = new Dog();
-    const AAnimal* cat = new Cat();
-
-    std::cout << "\nDog makes sound: ";
-    dog->makeSound();
-
-    std::cout << "Cat makes sound: ";
-    cat->makeSound();
-
-    std::cout << "\nDeleting Dog and Cat:\n";
-    delete dog;
-    delete cat;
-
-    std::cout << "\nTesting deep copy of Brain:\n";
-    Cat basicDog;
-    basicDog.getBrain()->setIdea(0, "I'm hungry");
-    basicDog.getBrain()->setIdea(1, "I want to play");
-
-    Cat copyDog(basicDog);  // Calls deep copy constructor
-    copyDog.getBrain()->setIdea(1, "I changed my mind");
-
-    std::cout << "Original Dog Brain Idea 1: " << basicDog.getBrain()->getIdea(1) << std::endl;
-    std::cout << "Copied Dog Brain Idea 1: " << copyDog.getBrain()->getIdea(1) << std::endl;
-
-    std::cout << "\nCreating an array of 4 AAnimal* with alternating Dog and Cat:\n";
-
-    AAnimal* animals[4];
-    for (int i = 0; i < 4; i++) {
-        if (i % 2 == 0)
-            animals[i] = new Dog();
-        else
-            animals[i] = new Cat();
-    }
-
-    std::cout << "\nMaking sounds:\n";
-    for (int i = 0; i < 4; i++) {
-        animals[i]->makeSound();
-    }
-    // Cat ;
-
-    std::cout << "\nCleaning up array:\n";
-    for (int i = 0; i < 4; i++) {
-        delete animals[i];
-    }
-
+    // Check for leaks with valgrind:
+    // valgrind --leak-check=full ./a.out
     return 0;
 }

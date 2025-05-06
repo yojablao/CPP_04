@@ -15,7 +15,7 @@ class Cat : public AAnimal
         ~Cat();
         void makeSound()const ;
         Cat &operator=(const  Cat &o);
-        Brain* getBrain() const ;
+        Brain* Mybrain() const ;
 };
 
 #endif
