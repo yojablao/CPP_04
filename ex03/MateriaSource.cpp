@@ -4,19 +4,19 @@
 
 MateriaSource::MateriaSource() {
     for (int i = 0; i < 4; ++i)
-        _materias[i] = nullptr;
+        _materias[i] = NULL;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
     for (int i = 0; i < 4; ++i)
-        _materias[i] = other._materias[i] ? other._materias[i]->clone() : nullptr;
+        _materias[i] = other._materias[i] ? other._materias[i]->clone() : NULL;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
     if (this != &other) {
         for (int i = 0; i < 4; ++i) {
             delete _materias[i];
-            _materias[i] = other._materias[i] ? other._materias[i]->clone() : nullptr;
+            _materias[i] = other._materias[i] ? other._materias[i]->clone() : NULL;
         }
     }
     return *this;
@@ -43,5 +43,5 @@ AMateria* MateriaSource::createMateria(const std::string& type) {
         if (_materias[i] && _materias[i]->getType() == type)
             return _materias[i]->clone();
     }
-    return nullptr;
+    return NULL;
 }
