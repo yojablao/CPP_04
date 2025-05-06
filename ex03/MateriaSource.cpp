@@ -1,6 +1,5 @@
-// MateriaSource.cpp
+
 #include "MateriaSource.hpp"
-#include <iostream>
 
 MateriaSource::MateriaSource() {
     for (int i = 0; i < 4; ++i)
@@ -31,7 +30,8 @@ void MateriaSource::learnMateria(AMateria* m) {
     if (!m) return;
     for (int i = 0; i < 4; ++i) {
         if (!_materias[i]) {
-            _materias[i] = m;
+            _materias[i] = m->clone();
+            delete m;
             return;
         }
     }
@@ -43,5 +43,7 @@ AMateria* MateriaSource::createMateria(const std::string& type) {
         if (_materias[i] && _materias[i]->getType() == type)
             return _materias[i]->clone();
     }
+
+
     return NULL;
 }

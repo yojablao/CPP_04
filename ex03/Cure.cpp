@@ -1,9 +1,9 @@
 #include "Cure.hpp"
 
-Cure::Cure():AMateria("Cure")
+Cure::Cure():AMateria("cure")
 {
 }
-Cure::Cure(const Cure &o):AMateria("Cure")
+Cure::Cure(const Cure &o):AMateria("cure")
 {
     *this = o;
 }

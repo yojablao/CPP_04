@@ -1,4 +1,4 @@
-// Character.cpp
+
 #include "Character.hpp"
 
 Character::Character(std::string const & name) : _name(name) {
@@ -41,16 +41,16 @@ std::string const & Character::getName() const {
     return _name;
 }
 
-// Character.cpp (updated)
+
 void Character::equip(AMateria* m) {
     if (!m) return;
     for (int i = 0; i < 4; ++i) {
         if (!stor[i]) {
-            stor[i] = m->clone(); // Clone the materia
+            stor[i] = m->clone(); 
             return;
         }
     }
-    delete m; // Delete if inventory is full (optional)
+    delete m;
 }
 
 void Character::unequip(int idx) {

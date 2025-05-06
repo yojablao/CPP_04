@@ -7,40 +7,35 @@
 void testCharacter() {
     std::cout << "\n===== Testing Character =====" << std::endl;
 
-    // Create materias
     AMateria* cure = new Cure();
     AMateria* ice = new Ice();
 
-    // Create characters
+
     Character alice("Alice");
     Character bob("Bob");
 
-    // Equip materias
+
     alice.equip(cure);
     alice.equip(ice);
     bob.equip(ice->clone());
 
-    // Use materias
-    alice.use(0, bob);  // Alice heals Bob
-    bob.use(0, alice);  // Bob shoots ice at Alice
 
-    // Test copy constructor (deep copy)
+    alice.use(0, bob);  
+    bob.use(0, alice); 
+
+
     Character copy(alice);
-    copy.use(1, bob);   // Copy shoots ice at Bob
-
-    // Test assignment operator (deep copy)
+    copy.use(1, bob);  
     Character assigned("Assigned");
     assigned = alice;
-    assigned.use(0, bob); // Assigned heals Bob
+    assigned.use(0, bob); 
 
-    alice.unequip(0);   // Alice drops cure (memory leak if not handled)
+    alice.unequip(0); 
     delete cure;       
-
-    // Equip same materia twice (should not duplicate)
     AMateria* anotherIce = new Ice();
     alice.equip(anotherIce);
-    alice.equip(anotherIce); // Should ignore duplicate
-    alice.use(2, bob);       // Uses anotherIce
+    alice.equip(anotherIce); 
+    alice.use(2, bob);       
 }
 
 void testMateriaSource() {
@@ -50,18 +45,19 @@ void testMateriaSource() {
     source.learnMateria(new Cure());
     source.learnMateria(new Ice());
 
-    AMateria* cured = source.createMateria("Cure");
-    AMateria* iced = source.createMateria("Ice");
-    AMateria* unknown = source.createMateria("Fire"); // Should return nullptr
+    AMateria* cured = source.createMateria("cure");
+    AMateria* iced = source.createMateria("ice");
+    AMateria* unknown = source.createMateria("Fire");
 
     Character dummy("Dummy");
     if (cured) {
         dummy.equip(cured);
-        dummy.use(0, dummy); // Heals self
+        dummy.use(0, dummy); 
     }
     if (iced) {
         dummy.equip(iced);
-        dummy.use(1, dummy); // Shoots ice at self
+        dummy.use(1, dummy);
+        // std::cout << "Failed to create unknown materia." << std::endl;
     }
     if (!unknown) {
         std::cout << "Failed to create unknown materia." << std::endl;
