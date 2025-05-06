@@ -2,16 +2,16 @@
 
 Ice::Ice():AMateria("ice")
 {
-    std:: cout << "Ice default constructor" << std::endl;
+
 }
 Ice::Ice(const Ice &o):AMateria("ice")
 {
     *this = o;
-    std:: cout << "Ice default constructor" << std::endl;
+
 }
 Ice::~Ice()
 {
-    std:: cout << "Ice destructor" << std::endl;
+
 }
 AMateria *Ice::clone() const
 {
@@ -19,12 +19,9 @@ AMateria *Ice::clone() const
 }
 Ice &Ice::operator=(const Ice &o)
 {
-    std:: cout << "Ice copy assignment "<< std::endl;
+
      if (this != &o) 
-    {
-        AMateria::operator=(o);
-        std:: cout << "Ice copy  assignment"<< std::endl;
-    }
+    {AMateria::operator=(o);}
     return (*this);
 }
 void Ice::use(ICharacter &target)

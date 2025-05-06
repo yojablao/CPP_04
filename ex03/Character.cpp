@@ -29,27 +29,34 @@ Character& Character::operator=(const Character& other) {
     return *this;
 }
 
-Character::~Character() {
+Character::~Character()
+{
     for (int i = 0; i < 4; ++i)
-        delete stor[i];
+    {
+        if(stor[i] != nullptr)
+            delete stor[i];
+    } 
 }
 
 std::string const & Character::getName() const {
     return _name;
 }
 
+// Character.cpp (updated)
 void Character::equip(AMateria* m) {
     if (!m) return;
     for (int i = 0; i < 4; ++i) {
         if (!stor[i]) {
-            stor[i] = m;
+            stor[i] = m->clone(); // Clone the materia
             return;
         }
     }
+    delete m; // Delete if inventory is full (optional)
 }
 
 void Character::unequip(int idx) {
     if (idx < 0 || idx >= 4) return;
+    delete stor[idx];
     stor[idx] = nullptr;
 }
 

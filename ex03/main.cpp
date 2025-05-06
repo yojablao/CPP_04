@@ -33,9 +33,8 @@ void testCharacter() {
     assigned = alice;
     assigned.use(0, bob); // Assigned heals Bob
 
-    // Test unequip (no double-free)
     alice.unequip(0);   // Alice drops cure (memory leak if not handled)
-    delete cure;        // Manually delete if unequip doesn't handle it
+    delete cure;       
 
     // Equip same materia twice (should not duplicate)
     AMateria* anotherIce = new Ice();

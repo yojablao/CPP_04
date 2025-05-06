@@ -1,6 +1,6 @@
 NAME =  animal 
 CC = c++ 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g
 
 SRC = main.cpp AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp Character.cpp
 
