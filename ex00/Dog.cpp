@@ -1,9 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:16:07 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:16:08 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Dog.hpp"
+
 
 Dog::Dog()
 {
-    this -> type = "Dog";
     std:: cout << "Dog default constructor" << std::endl;
+    this -> type = "Dog";
+}
+
+Dog::Dog(const Dog & o):Animal(o)
+{
+    if(&o != this)
+        *this = o;
+    std:: cout << "Dog copy constructor "<< std::endl;
 }
 Dog::~Dog()
 {
@@ -12,18 +32,13 @@ Dog::~Dog()
 
 Dog &Dog::operator=(const Dog&o)
 {
-    this->type = o.type;
     std:: cout << "Dog copy assignment "<< std::endl;
-    return(*this);
+    if (this != &o)
+    {this->type = o.type;}
+    return (*this);
 }
 
-void Dog::makeSound()const
+void Dog::makeSound() const
 {
-    std:: cout << "Woof! Woof!" << std::endl;
-}
-Dog::Dog(const Dog & o):Animal(o)
-{
-    if(&o != this)
-        *this = o;
-    std:: cout << "Dog copy constructor "<< std::endl;
+    std:: cout << "Woof! Woof!"<< std::endl;
 }

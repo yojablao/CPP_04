@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:25:47 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:25:48 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DOG_HPP
 #define DOG_HPP
 
@@ -6,7 +18,8 @@
 
 class Dog : public Animal
 {
-    Brain * brain;
+    private:
+        Brain * brain;
     public:
         Dog();
         Dog(const  Dog &o);

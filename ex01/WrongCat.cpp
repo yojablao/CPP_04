@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:24:28 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:24:29 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat()
@@ -11,7 +23,8 @@ WrongCat::~WrongCat()
 }
 WrongCat &WrongCat::operator=(const WrongCat&o)
 {
-    this->type = o.type;
+    if(this != &o)
+        this->type = o.type;
     std:: cout << "WrongCat copy assignment "<< std::endl;
     return (*this);
 }
@@ -22,6 +35,7 @@ void WrongCat::makeSound() const
 }
 WrongCat::WrongCat(const WrongCat & o):WrongAnimal(o)
 {
+    if(this != &o)
+        *this = o;
     std:: cout << "WrongCat copy constructor "<< std::endl;
-    *this = o;
 }

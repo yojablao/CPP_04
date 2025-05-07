@@ -18,9 +18,8 @@ $(NAME) :$(OBJ)
 clean:
 	rm -f $(OBJ)
 
-# Clean everything (objects + executable)
+
 fclean: clean
 	rm -f $(NAME)
 
-# Rebuild everything
 re: fclean all

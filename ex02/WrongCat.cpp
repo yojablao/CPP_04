@@ -11,7 +11,8 @@ WrongCat::~WrongCat()
 }
 WrongCat &WrongCat::operator=(const WrongCat&o)
 {
-    this->type = o.type;
+    if(this != &o)
+        this->type = o.type;
     std:: cout << "WrongCat copy assignment "<< std::endl;
     return (*this);
 }
@@ -22,6 +23,7 @@ void WrongCat::makeSound() const
 }
 WrongCat::WrongCat(const WrongCat & o):WrongAnimal(o)
 {
+    if(this != &o)
+        *this = o;
     std:: cout << "WrongCat copy constructor "<< std::endl;
-    *this = o;
 }

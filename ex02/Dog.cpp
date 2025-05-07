@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:30:13 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:30:14 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Dog.hpp"
 
 Dog::Dog()
 {
-    this -> type = "Dog";
     std:: cout << "Dog default constructor" << std::endl;
+    this -> type = "Dog";
     brain = new Brain;
 }
 Dog::~Dog()
@@ -14,23 +26,26 @@ Dog::~Dog()
 Brain* Dog::getBrain() const {
     return brain;
 }
-Dog& Dog::operator=(const Dog& o)
+Dog &Dog::operator=(const Dog&o)
 {
-    std::cout << "Dog copy assignment " << std::endl;
+    std:: cout << "Dog copy assignment "<< std::endl;
     if (this != &o)
     {
         this->type = o.type;
-        // if (this->brain)  
-            delete this->brain;
-        this->brain = new Brain(*o.brain);
+        delete this->brain;
+        this->brain = o.brain;
     }
-    return *this;
+    return (*this);
 }
 void Dog::makeSound() const
 {
     std:: cout << "Woof! Woof!"<< std::endl;
 }
-Dog::Dog(const Dog& o) : AAnimal(o), brain(new Brain(*o.brain))
-{
-    std::cout << "Dog copy constructor " << std::endl;
+Dog::Dog(const Dog & o):AAnimal(o)
+{    
+    std:: cout << "Dog copy constructor "<< std::endl;
+    this->brain = NULL;
+    if(&o != this)
+        *this = o;
 }
+

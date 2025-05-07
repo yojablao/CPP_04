@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:18:21 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:18:36 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Animal.hpp"
 
 Animal::Animal()
 {
-    this -> type = "Animal";
     std:: cout << "Animal default constructor" << std::endl;
+    this -> type = "Animal";
 }
 Animal::~Animal()
 {
@@ -11,8 +23,9 @@ Animal::~Animal()
 }
 Animal &Animal::operator=(const Animal&o)
 {
-    this->type = o.type;
     std:: cout << "Animal copy assignment "<< std::endl;
+    if(this != &o)
+        this->type = o.type;
     return *this;
 }
 
@@ -23,7 +36,8 @@ void Animal::makeSound() const
 }
 Animal::Animal(const Animal & o)
 {
-    *this = o;
     std:: cout << "Animal copy constructor "<< std::endl;
+    if(this != &o)
+        *this = o;
 }
 std::string Animal::getType()const {return(type);}

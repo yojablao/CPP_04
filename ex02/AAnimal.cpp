@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   AAnimal.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/07 02:26:52 by yojablao          #+#    #+#             */
+/*   Updated: 2025/05/07 02:29:04 by yojablao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "AAnimal.hpp"
 
 AAnimal::AAnimal()
 {
-    this -> type = "AAnimal";
     std:: cout << "AAnimal default constructor" << std::endl;
+    this -> type = "AAnimal";
 }
 AAnimal::~AAnimal()
 {
@@ -17,7 +29,9 @@ AAnimal &AAnimal::operator=(const AAnimal&o)
 }
 AAnimal::AAnimal(const AAnimal & o)
 {
-    *this = o;
     std:: cout << "AAnimal copy constructor "<< std::endl;
+    if(this != &o)
+        *this = o;
 }
-std::string AAnimal::getType()const {return(type);}
+std::string AAnimal::getType() const
+{return(type);}
