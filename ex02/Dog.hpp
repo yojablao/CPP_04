@@ -6,14 +6,14 @@
 /*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:30:19 by yojablao          #+#    #+#             */
-/*   Updated: 2025/05/07 02:30:20 by yojablao         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:43:52 by yojablao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOG_HPP
 #define DOG_HPP
 
-#include "Animal.hpp"
+
 #include "AAnimal.hpp"
 #include "Brain.hpp"
 

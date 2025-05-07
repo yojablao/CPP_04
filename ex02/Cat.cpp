@@ -6,7 +6,7 @@
 /*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:30:24 by yojablao          #+#    #+#             */
-/*   Updated: 2025/05/07 02:37:47 by yojablao         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:44:14 by yojablao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void Cat::makeSound() const
 Cat::Cat(const Cat & o):AAnimal(o)
 {    
     std:: cout << "Cat copy constructor "<< std::endl;
-    this->brain;
+    this->brain = NULL;
     if(&o != this)
         *this = o;
 }
