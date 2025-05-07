@@ -6,7 +6,7 @@
 /*   By: yojablao <yojablao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 02:26:00 by yojablao          #+#    #+#             */
-/*   Updated: 2025/05/07 02:28:35 by yojablao         ###   ########.fr       */
+/*   Updated: 2025/05/07 02:37:23 by yojablao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Cat &Cat::operator=(const Cat&o)
     std:: cout << "Cat copy assignment "<< std::endl;
      if (this != &o) 
     {
-        this -> type = "Cat";
+        this -> type = o.type;
         delete this->brain;
         this->brain = new Brain(*o.brain);
     }
