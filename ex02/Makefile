@@ -1,6 +1,6 @@
 NAME =  animal
 
-CC = g++ 
+CC = c++ 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
 SRC =  AAnimal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 HEAD =  AAnimal.hpp Cat.hpp Dog.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp

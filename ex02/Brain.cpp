@@ -36,7 +36,7 @@ Brain &Brain::operator=(const Brain&o)
 
 const std::string &Brain::getIdea(unsigned int i)const
 {
-    if (i < 0 || i >= 100 ) return this->ideas[0];
+    if ( i >= 100 ) return this->ideas[0];
     return (this->ideas[i]);
 }
 void Brain::setIdea(int i, const std::string& idea)

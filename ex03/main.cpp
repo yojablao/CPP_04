@@ -26,13 +26,15 @@ void subjecttest()
         AMateria* tmp;
         tmp = src->createMateria("ice");
         me->equip(tmp);
+        delete tmp;
         tmp = src->createMateria("cure");
-        me->equip(tmp);
+        me->equip(tmp);;
         ICharacter* bob = new Character("bob");
         me->use(0, *bob);
         me->use(1, *bob);
         delete bob;
         delete me;
+        delete tmp;
         delete src;
 }
 void testCharacter() {
@@ -48,9 +50,10 @@ void testCharacter() {
 
     alice.equip(cure);
     alice.equip(ice);
-    bob.equip(ice->clone());
+    AMateria *tmp  = ice->clone();
+    bob.equip(tmp);
 
-
+    delete tmp;
     alice.use(0, bob);  
     bob.use(0, alice); 
 
@@ -64,9 +67,12 @@ void testCharacter() {
     alice.unequip(0); 
     delete cure;       
     AMateria* anotherIce = new Ice();
+
     alice.equip(anotherIce);
     alice.equip(anotherIce); 
     alice.use(2, bob);       
+    delete ice;
+    delete anotherIce;
 }
 
 void testMateriaSource() {
